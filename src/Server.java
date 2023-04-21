@@ -25,7 +25,7 @@ public class Server {
             String line;
             while((line = bufferedReader.readLine()) != null ){
                 System.out.println("Server received: " + line);
-                printWriter.println(line);
+                printWriter.println(gameLogic.FlipCoin());
                 printWriter.flush();
             }
         } catch (IOException e) {
