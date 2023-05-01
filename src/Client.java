@@ -15,7 +15,7 @@ public class Client {
     }
     void createController(){
         clientController = new ClientController();
-
+        String playInput = clientController.getPlayInput();
 
         //client Connecting to server
         try {

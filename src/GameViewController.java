@@ -7,4 +7,8 @@ public class GameViewController {
 
     }
 
+    public String getPlayInput() {
+        return gameView.getPlayInput();
+    }
+
 }

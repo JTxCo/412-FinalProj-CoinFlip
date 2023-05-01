@@ -9,4 +9,8 @@ public class ClientController {
         initialController = new InitialController();
         gameViewController = new GameViewController();
     }
+
+    public String getPlayInput() {
+        return gameViewController.getPlayInput();
+    }
 }
