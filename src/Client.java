@@ -24,12 +24,17 @@ public class Client {
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(System.in));
             PrintWriter socketWriter = new PrintWriter(socket.getOutputStream());
             String line = "testing";
-            while((line = inputReader.readLine())!=null){
-                socketWriter.println(line);
-                socketWriter.flush();
-                String retval = socketReader.readLine();
-                System.out.println(retval);
-            }
+            System.out.println("client> sent to server: "+playInput);
+            socketWriter.println(playInput);
+            socketWriter.flush();
+            String retval = socketReader.readLine();
+            System.out.println(retval);
+//            while((line = inputReader.readLine())!=null){
+//                socketWriter.println(line);
+//                socketWriter.flush();
+//                String retval = socketReader.readLine();
+//                System.out.println(retval);
+//            }
         } catch (UnknownHostException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

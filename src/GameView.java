@@ -7,7 +7,8 @@ public class GameView {
     public GameView() {
         // Create a new instance of the class
         // and call the method
-        makeBettingSection();
+        //makeBettingSection();
+        makePlaySelection();
     }
     public void makeLeaderBoard(){}
     public void makeCoinAnimation(){}

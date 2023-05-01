@@ -3,7 +3,7 @@ public class ClientController {
     private VerificationController verificationController;
     private InitialController initialController;
     private GameViewController gameViewController;
-    private void createClientController() {
+    public ClientController() {
         model = new Model();
         verificationController = new VerificationController();
         initialController = new InitialController();
@@ -11,6 +11,8 @@ public class ClientController {
     }
 
     public String getPlayInput() {
-        return gameViewController.getPlayInput();
+        String result = gameViewController.getPlayInput();
+        System.out.println("clientController input: "+result);
+        return result;
     }
 }
