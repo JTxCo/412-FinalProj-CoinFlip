@@ -28,7 +28,9 @@ public class Client {
             socketWriter.println(playInput);
             socketWriter.flush();
             String retval = socketReader.readLine();
-            System.out.println(retval);
+            System.out.println("client> recieved result from server coin flip: "+retval);
+            String betResult = socketReader.readLine();
+            System.out.println("client> bet result: "+betResult);
 //            while((line = inputReader.readLine())!=null){
 //                socketWriter.println(line);
 //                socketWriter.flush();

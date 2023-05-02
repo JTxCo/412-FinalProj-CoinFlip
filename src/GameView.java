@@ -38,7 +38,7 @@ public class GameView {
     public void makePlaySelection(){
         //temporary: take user input of heads/tails, will replace with radio buttons later
         try {
-            System.out.println("Enter heads or tails: ");
+            System.out.println("Enter Heads or Tails: ");
             InputStreamReader inputStreamReader = new InputStreamReader(System.in);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             playInput = bufferedReader.readLine();
