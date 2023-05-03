@@ -13,6 +13,8 @@ public class DoQueries {
         }
 
         makeConnection();
+        verifyUser("jim", null);
+        verifyUser("jim","jimPass");
         showData();
     }
 
@@ -51,7 +53,25 @@ public class DoQueries {
         }
         
     } 
-    public void UpdateBalance(){ }; // Update the balance of the user
+    public void UpdateBalance(String username, int newBalance){ 
+        Connection conn;
+        try{
+            String s = "Updating balance for user: " + username + " to " + newBalance;
+            System.out.println(s);
+            conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
+            PreparedStatement ps = conn.prepareStatement("UPDATE coinflipData SET accountBalance = ? WHERE username = ?");
+            ps.setInt(1, newBalance);
+            ps.setString(2, username);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+            s = " Balance updated for user: " + username + " to " + newBalance;
+            System.out.println(s);
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }; // Update the balance of the user
     public void InitializeUser(String username, String password, int accountBalance){
         System.out.println("Initializing user...");
         Connection conn;
@@ -61,8 +81,8 @@ public class DoQueries {
             ps.setString(1, username);
             ps.setString(2, password);
             ps.setInt(3, accountBalance);
-            ps.close();
             ps.executeUpdate();
+            ps.close();
             conn.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -71,9 +91,68 @@ public class DoQueries {
 
         System.out.format("User initialized as: %s %s %d.", username, password, accountBalance);
     }; // Initialize the user
-    public void verifyUser(){}; // Verify the user
-    public Boolean isUsernameTaken(){
-        return true;
+    public void verifyUser( String username, String password){
+        System.out.println("Verifying user...");
+        Connection conn;
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
+            PreparedStatement ps = conn.prepareStatement("SELECT CASE WHEN EXISTS (SELECT 1 FROM coinflipData WHERE username = ? AND password = ?) THEN 2 WHEN EXISTS (SELECT 1 FROM coinflipData WHERE username = ?) THEN 1 ELSE 0 END");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, username);
+            ResultSet rs = ps.executeQuery();
+            int i = rs.getInt(1);
+            switch (i) {
+                case 0:
+                    System.out.println("User with username " + username + " does not exist.");
+                    break;
+                case 1:
+                    System.out.println("User with username " + username + " exists but password is not a match.");
+                    break;
+                case 2:
+                    System.out.println("User with username " + username + " exists and password is a match.");
+                    break;
+                default:
+                    System.out.println("Unknown result: " + i);
+                    break;
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }; // Verify the user
+    public Boolean isUsernameTaken(String userName){
+        Connection conn; 
+        PreparedStatement ps;
+        System.out.println("Checking if username is taken...");
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
+            ps = conn.prepareStatement("SELECT * FROM coinflipData WHERE username = ?");
+            ps.setString(1, userName);
+            ResultSet rs = ps.executeQuery();
+            ps.close();
+            conn.close();
+            if(rs.next()){
+                System.out.format("Username: %s is taken.\n", userName);
+                return true;
+            }
+            else{
+                System.out.format("Username: %s is not taken.\n", userName);
+                return false;
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }finally{
+            System.out.println("Username check complete.");
+        }
+        
+        return false;
     }; // Check if the username is taken
 
 }
