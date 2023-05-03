@@ -59,7 +59,9 @@ public class Server {
                 printWriter = new PrintWriter(clientSocket.getOutputStream());
                 while((line = bufferedReader.readLine()) != null ){
                     System.out.println("Server received: " + line);
-                    printWriter.println(gameLogic.FlipCoin());
+                    printWriter.println(gameLogic.flipCoin());
+                    printWriter.flush();
+                    printWriter.println(gameLogic.compareBet(line));
                     printWriter.flush();
                 }
             } catch (IOException e) {
