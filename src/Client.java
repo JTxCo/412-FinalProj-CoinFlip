@@ -15,6 +15,10 @@ public class Client {
         new Client().createController();
     }
     void createController(){
+        clientController = new ClientController();
+
+
+        //client Connecting to server, need to close connection
         try {
             socket = new Socket("localhost", 5001);
         } catch (IOException e) {
