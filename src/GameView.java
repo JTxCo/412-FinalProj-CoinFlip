@@ -81,15 +81,15 @@ public class GameView {
 
 
         //temporary: take user input of heads/tails, will replace with radio buttons later
-        try {
-            System.out.println("Enter Heads or Tails: ");
-            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            playInput = bufferedReader.readLine();
-            System.out.println("selected: "+playInput);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            System.out.println("Enter Heads or Tails: ");
+//            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//            playInput = bufferedReader.readLine();
+//            System.out.println("selected: "+playInput);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return playSelectionPanel;
     }
