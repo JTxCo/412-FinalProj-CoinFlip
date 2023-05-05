@@ -16,7 +16,7 @@ public class DoQueries {
         }
         makeConnection();
         startFunction();
-        // showData();
+        showData();
     }
     public void startFunction(){
         if(!isUsernameTaken(" ")){
@@ -38,6 +38,8 @@ public class DoQueries {
                     "password STRING," +
                     "accountBalance INTEGER);";
             StartConn.createStatement().executeUpdate(cmd);
+            String pragmaCmd = "PRAGMA busy_timeout = 10000;";
+            StartConn.createStatement().executeUpdate(pragmaCmd);
             StartConn.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -187,6 +189,8 @@ public class DoQueries {
             ps = conn.prepareStatement("SELECT * FROM coinflipData WHERE username = ?");
             ps.setString(1, userName);
             ResultSet rs = ps.executeQuery();
+            String pragmaCmd = "PRAGMA busy_timeout = 10000;";
+            conn.createStatement().executeUpdate(pragmaCmd);
             // System.out.println(rs.getString("username") + " is the username");
             if(rs.next()){
                 if(rs.getString("username").equals(userName)){
