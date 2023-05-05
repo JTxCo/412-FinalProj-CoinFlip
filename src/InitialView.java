@@ -11,6 +11,7 @@ public class InitialView {
         frame.add(makePrompt());
 
         frame.setSize(400,400);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
         // Create a new instance of the class
