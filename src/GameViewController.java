@@ -33,7 +33,7 @@ public class GameViewController {
         public void actionPerformed(ActionEvent e) {
             if (gameView.getHeadsButton().isSelected()){
                 System.out.println("Heads button selected!");
-                playInput="Heads";
+                playInput="Heads"; //change to setPlayInput (will create method)
                 try {
                     //socket = new Socket("localhost", 5001);
 //                    BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -46,10 +46,10 @@ public class GameViewController {
 //                    String betResult = socketReader.readLine();
 //                    System.out.println("client> bet result: "+betResult);
 
-                    outputStream = new ObjectOutputStream(socket.getOutputStream());
-                    Item item = new Item("username1",playInput);
-                    System.out.println("Object written: "+item);
-                    outputStream.writeObject(item);
+//                    outputStream = new ObjectOutputStream(socket.getOutputStream());
+//                    Item item = new Item("username1",playInput);
+//                    System.out.println("Object written: "+item);
+//                    outputStream.writeObject(item);
 
 
                 } catch (IOException ex) {
@@ -71,10 +71,10 @@ public class GameViewController {
 //                    String betResult = socketReader.readLine();
 //                    System.out.println("client> bet result: "+betResult);
 
-                    outputStream = new ObjectOutputStream(socket.getOutputStream());
-                    Item item = new Item("username1",playInput);
-                    System.out.println("Object written: "+item);
-                    outputStream.writeObject(item);
+//                    outputStream = new ObjectOutputStream(socket.getOutputStream());
+//                    Item item = new Item("username1",playInput);
+//                    System.out.println("Object written: "+item);
+//                    outputStream.writeObject(item);
 
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);

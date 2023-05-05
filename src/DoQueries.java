@@ -158,12 +158,12 @@ public class DoQueries {
     public ArrayList getTopDudes(){
         Connection conn;
         PreparedStatement ps;
+        ArrayList<Map.Entry<String,Integer>> topDudes = new ArrayList<>();
         System.out.println("Getting top dudes...");
         try{
             conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
-            ps = conn.prepareStatement("SELECT username, accountBalance FROM coinflipData ORDER BY accountBalance DESC LIMIT 3")
+            ps = conn.prepareStatement("SELECT username, accountBalance FROM coinflipData ORDER BY accountBalance DESC LIMIT 3");
             ResultSet rs = ps.executeQuery();
-            ArrayList<Map.Entry<String, Integer>> topDudes = new ArrayList<>();
             while(rs.next()){
                 String username = rs.getString("username");
                 int accountBalance = rs.getInt("accountBalance");
@@ -172,7 +172,8 @@ public class DoQueries {
             }
             return topDudes;
         }catch(SQLException e){
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
+        return topDudes;
     }
 }
