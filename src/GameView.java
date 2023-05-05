@@ -25,7 +25,7 @@ public class GameView {
         panel.add(BorderLayout.SOUTH,makePlaySelection());
         //panel.add(BorderLayout.EAST,makeBettingSection());
         panel.add(BorderLayout.CENTER,makeLeaderBoard());
-
+        panel.add(BorderLayout.NORTH,makeMiddleSection());
 
         // Create a new instance of the class
         // and call the method
@@ -50,9 +50,6 @@ public class GameView {
 
         return leaderboardPanel;
     }
-    public void makeCoinAnimation(){}
-    public void makeUserInfo(){}
-
     public JTextField getBetTextField() {
         return betTextField;
     }
@@ -82,7 +79,29 @@ public class GameView {
         return betSelectionPanel;
 
     }
-
+    public JPanel makeMiddleSection(){
+        JPanel middleSection = new JPanel();
+        middleSection.setLayout(new BoxLayout(middleSection,BoxLayout.Y_AXIS));
+        middleSection.add(makeBigLabel());
+        middleSection.add(makeGameStatus());
+        return middleSection;
+    }
+    public JPanel makeBigLabel(){
+        JPanel bigLabelPanel = new JPanel();
+        JLabel bigLabel = new JLabel("Coin Flip!");
+        Font font = bigLabel.getFont();
+        bigLabel.setFont(font.deriveFont(font.getSize() + 50f));
+        bigLabelPanel.add(bigLabel);
+        return bigLabelPanel;
+    }
+    public JPanel makeGameStatus(){
+        JPanel gameStatusPanel = new JPanel();
+        JLabel title = new JLabel("Game Status");
+        JLabel gameStatus = new JLabel(" ", SwingConstants.CENTER);
+        gameStatusPanel.add(title);
+        gameStatusPanel.add(gameStatus);
+        return gameStatusPanel;
+    }
     public void setBetButtonActionListener(ActionListener aL){betButton.addActionListener(aL);
     }
     public void makeCoinLabel(){}
@@ -136,6 +155,8 @@ public class GameView {
 
     public void setPlayButtonActionListener(ActionListener aL){playButton.addActionListener(aL);
     }
-
+    public void setGamestatus(String s){
+        .setText(s);
+    }
 
 }

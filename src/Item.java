@@ -4,13 +4,13 @@ public class Item implements Serializable{
     private String username;
     private String bet;
     private String password;
-
-    public Item(String username, String password, String bet){
+    private int BetAmount;
+    public Item(String username, String bet, String password, int BetAmount){
         this.username=username;
         this.bet=bet;
         this.password = password; 
+        this.BetAmount = BetAmount;
     }
-
     public String getUsername() {
         return username;
     }
@@ -20,6 +20,9 @@ public class Item implements Serializable{
     }
     public String getPassword(){
         return password;
+    }
+    public int getBetAmount(){
+        return BetAmount;
     }
     public String toString() {
         return "Username = " + getUsername() + " ; Bet = " + getBet();
