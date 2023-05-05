@@ -1,8 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class VerificationController {
@@ -30,6 +28,12 @@ public class VerificationController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("submit button");
+            BufferedReader socketReader = null; //reader from server
+            try {
+                socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
             if(isNew){
                 try {
@@ -37,6 +41,9 @@ public class VerificationController {
                     Item item = new Item(verificationView.getUserTextField().getText(),verificationView.getPasswordTextField().getText(),"NewUser");
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
+
+                    String retval = socketReader.readLine();
+                    System.out.println("client> recieved from server: "+retval);
 
                     GameViewController gameViewController = new GameViewController(socket);
                 } catch (IOException ex) {
@@ -50,7 +57,24 @@ public class VerificationController {
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
 
-                    GameViewController gameViewController = new GameViewController(socket);
+                    String retval = socketReader.readLine();
+
+                    System.out.println("client> recieved from server: "+retval);
+
+                    if(retval.equals("password does not match")){
+                        verificationView.makePasswordPanelVisible();
+                    }
+                    else if(retval.equals("user does not exist")){
+                        verificationView.makeExistPanelVisible();
+                    }
+                    else if(retval.equals("user exists and password matches")){
+                        verificationView.switchViews();
+                        GameViewController gameViewController = new GameViewController(socket);
+                    }
+
+//                    String betResult = socketReader.readLine();
+//                    System.out.println("client> bet result: "+betResult);
+
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
