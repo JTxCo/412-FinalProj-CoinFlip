@@ -24,6 +24,7 @@ public class GameView {
 
         panel.add(BorderLayout.SOUTH,makePlaySelection());
         //panel.add(BorderLayout.EAST,makeBettingSection());
+        panel.add(BorderLayout.CENTER,makeLeaderBoard());
 
 
         // Create a new instance of the class
