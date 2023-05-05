@@ -14,7 +14,9 @@ public class DoQueries {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        InitializeUser(" ", " ");
+        InitializeUser("  ", "  ");
+        InitializeUser("    ", "    ");
         makeConnection();
         // showData();
     }
