@@ -97,7 +97,7 @@ public class GameView {
     }
     public JPanel makeGameStatus(){
         JPanel gameStatusPanel = new JPanel();
-        JLabel title = new JLabel("Game Status");
+        JLabel title = new JLabel("Game Status: ");
         gameStatus = new JLabel(" ", SwingConstants.CENTER);
         gameStatusPanel.add(title);
         gameStatusPanel.add(gameStatus);

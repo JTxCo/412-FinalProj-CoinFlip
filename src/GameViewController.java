@@ -69,6 +69,7 @@ public class GameViewController {
 
                     String retval = socketReader.readLine();
                     System.out.println("client> recieved from server: "+retval);
+                    gameView.setGamestatus(retval);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -98,7 +99,22 @@ public class GameViewController {
             }
             else if(gameView.getTailsButton().isSelected()){
                 System.out.println("Tails button selected!");
-                playInput="Tails";
+                //playInput="Tails";
+
+                try {
+                    socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+                    outputStream = new ObjectOutputStream(socket.getOutputStream());
+                    item.setBet("Tails");
+                    System.out.println("Object written: "+item);
+                    outputStream.writeObject(item);
+
+                    String retval = socketReader.readLine();
+                    System.out.println("client> recieved from server: "+retval);
+                    gameView.setGamestatus(retval);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
 //                try {
 //                    BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 //                    PrintWriter socketWriter = new PrintWriter(socket.getOutputStream());
