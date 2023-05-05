@@ -1,14 +1,13 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class GameViewController {
     private GameView gameView;
     private String playInput="";
+    private ObjectInputStream inputStream = null;
+    private ObjectOutputStream outputStream = null;
 
     private Socket socket;
     public GameViewController() {
@@ -37,15 +36,21 @@ public class GameViewController {
                 playInput="Heads";
                 try {
                     //socket = new Socket("localhost", 5001);
-                    BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    PrintWriter socketWriter = new PrintWriter(socket.getOutputStream());
-                    System.out.println("client> sent to server: "+playInput);
-                    socketWriter.println(playInput);
-                    socketWriter.flush();
-                    String retval = socketReader.readLine();
-                    System.out.println("client> recieved result from server coin flip: "+retval);
-                    String betResult = socketReader.readLine();
-                    System.out.println("client> bet result: "+betResult);
+//                    BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+//                    PrintWriter socketWriter = new PrintWriter(socket.getOutputStream());
+//                    System.out.println("client> sent to server: "+playInput);
+//                    socketWriter.println(playInput);
+//                    socketWriter.flush();
+//                    String retval = socketReader.readLine();
+//                    System.out.println("client> recieved result from server coin flip: "+retval);
+//                    String betResult = socketReader.readLine();
+//                    System.out.println("client> bet result: "+betResult);
+
+                    outputStream = new ObjectOutputStream(socket.getOutputStream());
+                    Item item = new Item("username1",playInput);
+                    System.out.println("Object written: "+item);
+                    outputStream.writeObject(item);
+
 
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
