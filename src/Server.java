@@ -68,7 +68,7 @@ public class Server {
 
                 }catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
-                } catch (IOException e) {
+                } catch (IOException e){
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }

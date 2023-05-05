@@ -14,6 +14,7 @@ public class GameView {
     JRadioButton tailsButton;
     JTextField betTextField;
     JButton betButton;
+    JLabel gameStatus;
 
     public GameView() {
         //makePlaySelection();
@@ -97,7 +98,7 @@ public class GameView {
     public JPanel makeGameStatus(){
         JPanel gameStatusPanel = new JPanel();
         JLabel title = new JLabel("Game Status");
-        JLabel gameStatus = new JLabel(" ", SwingConstants.CENTER);
+        gameStatus = new JLabel(" ", SwingConstants.CENTER);
         gameStatusPanel.add(title);
         gameStatusPanel.add(gameStatus);
         return gameStatusPanel;
@@ -156,7 +157,7 @@ public class GameView {
     public void setPlayButtonActionListener(ActionListener aL){playButton.addActionListener(aL);
     }
     public void setGamestatus(String s){
-        .setText(s);
+        gameStatus.setText(s);
     }
 
 }
