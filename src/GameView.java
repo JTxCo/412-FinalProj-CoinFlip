@@ -12,6 +12,9 @@ public class GameView {
     JButton playButton;
     JRadioButton headsButton;
     JRadioButton tailsButton;
+    JTextField betTextField;
+    JButton betButton;
+
     public GameView() {
         //makePlaySelection();
 
@@ -20,6 +23,9 @@ public class GameView {
         panel.setLayout(new BorderLayout());
 
         panel.add(BorderLayout.SOUTH,makePlaySelection());
+        //panel.add(BorderLayout.EAST,makeBettingSection());
+
+
         // Create a new instance of the class
         // and call the method
         //makeBettingSection();
@@ -27,23 +33,56 @@ public class GameView {
         frame.setSize(600,600);
         frame.setVisible(true);
     }
-    public void makeLeaderBoard(){}
+    public JPanel makeLeaderBoard(){
+        JPanel leaderboardPanel = new JPanel();
+        leaderboardPanel.setLayout(new BoxLayout(leaderboardPanel,BoxLayout.Y_AXIS));
+
+        JLabel leaderboard = new JLabel("Leaderboard");
+        JLabel user1 = new JLabel("Insert user from array");
+        JLabel user2 = new JLabel("Insert user from array");
+        JLabel user3 = new JLabel("Insert user from array");
+
+        leaderboardPanel.add(leaderboard);
+        leaderboardPanel.add(user1);
+        leaderboardPanel.add(user2);
+        leaderboardPanel.add(user3);
+
+        return leaderboardPanel;
+    }
     public void makeCoinAnimation(){}
     public void makeUserInfo(){}
-    public void makeBettingSection(){
-        //will add text field and go button here
+
+    public JTextField getBetTextField() {
+        return betTextField;
+    }
+
+    public JPanel makeBettingSection(){
+        JPanel betSelectionPanel = new JPanel();
+        betSelectionPanel.setLayout(new BoxLayout(betSelectionPanel,BoxLayout.Y_AXIS));
+        JLabel instructions = new JLabel("Enter Bet: ");
+        betTextField = new JTextField(10);
+        betButton = new JButton("Go!");
+
+        betSelectionPanel.add(instructions);
+        betSelectionPanel.add(betTextField);
+        betSelectionPanel.add(betButton);
 
         //temporary: take user input of bet amount, will replace with text field
-        try {
-            System.out.println("Enter bet amount: ");
-            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-            String betInput = bufferedReader.readLine();
-            System.out.println("entered: "+betInput);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            System.out.println("Enter bet amount: ");
+//            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//            String betInput = bufferedReader.readLine();
+//            System.out.println("entered: "+betInput);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
+        return betSelectionPanel;
+
+    }
+
+    public void setBetButtonActionListener(ActionListener aL){betButton.addActionListener(aL);
     }
     public void makeCoinLabel(){}
     public void makeInstructionLabel(){}
