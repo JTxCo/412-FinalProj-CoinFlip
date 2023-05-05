@@ -29,9 +29,10 @@ public class GameViewController {
             String retval = socketReader.readLine(); 
             
             // if (retval.contains(",")) {
+                System.out.println("client> received from server: "+retval);
                 String[] entries = retval.replaceAll("[^,=a-zA-Z\\d]", "").split(",");
                 System.out.println();
-                System.out.println("client> received from server: "+retval);
+                
                 if(entries.length==1){
                     String username1 = entries[0].split("=")[0];
                     String balance1 = entries[0].split("=")[1];
