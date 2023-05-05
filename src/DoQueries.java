@@ -14,13 +14,21 @@ public class DoQueries {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        InitializeUser(" ", " ");
-        InitializeUser("  ", "  ");
-        InitializeUser("    ", "    ");
         makeConnection();
+        startFunction();
         // showData();
     }
-
+    public void startFunction(){
+        if(!isUsernameTaken(" ")){
+            InitializeUser(" ", " ");
+        }
+        if(!isUsernameTaken(("    "))){
+            InitializeUser("    ", " ");
+        }
+        if(!isUsernameTaken("        ")){
+            InitializeUser("        ", " ");
+        }
+    }
     public void makeConnection() {//this connects or makes the database
         try {
             System.out.println("Connecting to database...");
@@ -76,7 +84,7 @@ public class DoQueries {
 
     }; // Update the balance of the user
     public void InitializeUser(String username, String password){
-        System.out.println("Initializing user...");
+        // System.out.println("Initializing user...");
         Connection conn;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
@@ -173,28 +181,26 @@ public class DoQueries {
     public Boolean isUsernameTaken(String userName){
         Connection conn; 
         PreparedStatement ps;
-        System.out.println("Checking if username is taken...");
+        // System.out.println("Checking if username is taken...");
         try {
             conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
             ps = conn.prepareStatement("SELECT * FROM coinflipData WHERE username = ?");
             ps.setString(1, userName);
             ResultSet rs = ps.executeQuery();
-            ps.close();
-            conn.close();
-            System.out.printf("rs is:  "+ rs);
-            if(rs.next()){
-                System.out.format("Username: %s is taken.\n", userName);
+            // System.out.println(rs.getString("username") + " is the username");
+            if(rs.getString("username").equals(userName)){
+                // System.out.format("Username: %s is taken.\n", userName);
                 return true;
             }
             else{
-                System.out.format("Username: %s is not taken.\n", userName);
+                // System.out.format("Username: %s is not taken.\n", userName);
                 return false;
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }finally{
-            System.out.println("Username check complete.");
+            // System.out.println("Username check complete.");
         }
         
         return false;

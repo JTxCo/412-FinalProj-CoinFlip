@@ -26,22 +26,23 @@ public class GameViewController {
             item.setBet("TopThree");
             System.out.println("Object written: "+item);
             outputStream.writeObject(item);
-            String retval = socketReader.readLine();
-            
-            String[] entries = retval.replaceAll("[^,=a-zA-Z\\d]", "").split(",");
-            System.out.println("client> recieved from server: "+retval);
-            String username1 = entries[0].split("=")[0];
-            String balance1 = entries[0].split("=")[1];
-            String username2 = entries[1].split("=")[0];
-            String balance2 = entries[1].split("=")[1];
-            String username3 = entries[2].split("=")[0];
-            String balance3 = entries[2].split("=")[1];
-            System.out.println("username1: "+username1+" balance1: "+balance1);
-            System.out.println("username2: "+username2+" balance2: "+balance2);
-            System.out.println("username3: "+username3+" balance3: "+balance3);
-            gameView.setUser1(username1,Integer.parseInt(balance1));
-            gameView.setUser2(username2,Integer.parseInt(balance2));
-            gameView.setUser3(username3,Integer.parseInt(balance3));
+            String retval = socketReader.readLine(); 
+            if (retval.contains(",")) {
+                String[] entries = retval.replaceAll("[^,=a-zA-Z\\d]", "").split(",");
+                System.out.println("client> received from server: "+retval);
+                String username1 = entries[0].split("=")[0];
+                String balance1 = entries[0].split("=")[1];
+                String username2 = entries[1].split("=")[0];
+                String balance2 = entries[1].split("=")[1];
+                String username3 = entries[2].split("=")[0];
+                String balance3 = entries[2].split("=")[1];
+                System.out.println("username1: "+username1+" balance1: "+balance1);
+                System.out.println("username2: "+username2+" balance2: "+balance2);
+                System.out.println("username3: "+username3+" balance3: "+balance3);
+                gameView.setUser1(username1,Integer.parseInt(balance1));
+                gameView.setUser2(username2,Integer.parseInt(balance2));
+                gameView.setUser3(username3,Integer.parseInt(balance3));
+            } 
         } catch(IOException ex){
             throw new RuntimeException(ex);
         }
