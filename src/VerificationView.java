@@ -11,6 +11,7 @@ public class VerificationView {
     JFrame frame;
     JPanel pPanel;
     JPanel ePanel;
+    JLabel uniqueError;
 
     JLabel perror;
     JLabel eerror;
@@ -43,11 +44,14 @@ public class VerificationView {
 
         perror = new JLabel("password does not match");
         eerror = new JLabel("user does not exist");
+        uniqueError = new JLabel("Create a username that doesn't already exist");
 
         panel.add(perror);
         perror.setVisible(false);
         panel.add(eerror);
         eerror.setVisible(false);
+        panel.add(uniqueError);
+        uniqueError.setVisible(false);
 
 
         return panel;
@@ -60,6 +64,12 @@ public class VerificationView {
         perror.setVisible(true);
         eerror.setVisible(false);
 
+    }
+
+    public void makeUniqueErrorVisible(){
+        perror.setVisible(false);
+        eerror.setVisible(false);
+        uniqueError.setVisible(true);
     }
 
 
