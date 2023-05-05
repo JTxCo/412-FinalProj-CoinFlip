@@ -16,22 +16,9 @@ public class VerificationView {
     JLabel eerror;
 
     public VerificationView() {
-        // Create a new instance of the class
-        // and call the method
-        System.out.println("verification view constructor");
         frame = new JFrame();
         JPanel mainPanel = makePanel();
         frame.add(mainPanel);
-
-//        pPanel = passwordPanel();
-//        frame.add(pPanel);
-//        pPanel.setVisible(false);
-//
-//        ePanel = existPanel();
-//        frame.add(ePanel);
-//        ePanel.setVisible(false);
-
-
 
         frame.setSize(400,400);
         frame.setVisible(true);
