@@ -47,7 +47,7 @@ public class GameViewController {
 //                    System.out.println("client> bet result: "+betResult);
 
                     outputStream = new ObjectOutputStream(socket.getOutputStream());
-                    Item item = new Item("username1",playInput);
+                    Item item = new Item("jim",playInput, "jimPass");
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
 
@@ -72,7 +72,7 @@ public class GameViewController {
 //                    System.out.println("client> bet result: "+betResult);
 
                     outputStream = new ObjectOutputStream(socket.getOutputStream());
-                    Item item = new Item("username1",playInput);
+                    Item item = new Item("username1",playInput, "password1");
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
 
