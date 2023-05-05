@@ -15,8 +15,8 @@ public class ClientController {
     public ClientController(Socket s) {
         Socket socket = s;
         model = new Model();
-        verificationController = new VerificationController();
-        initialController = new InitialController();
+        //verificationController = new VerificationController();
+        initialController = new InitialController(socket);
         gameViewController = new GameViewController(socket);
     }
 
