@@ -6,8 +6,8 @@ import java.net.Socket;
 public class GameViewController {
     private GameView gameView;
     private String playInput="";
-    private ObjectInputStream inputStream = null;
-    private ObjectOutputStream outputStream = null;
+    private ObjectInputStream inputStream;
+    private ObjectOutputStream outputStream;
 
     private Socket socket;
     public GameViewController() {
@@ -31,6 +31,9 @@ public class GameViewController {
     public class PlayButtonActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("play button");
+            // outputStream = new ObjectOutputStream(socket.getOutputStream());
+
             if (gameView.getHeadsButton().isSelected()){
                 System.out.println("Heads button selected!");
                 playInput="Heads"; //change to setPlayInput (will create method)

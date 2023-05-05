@@ -97,7 +97,11 @@ public class Server {
                         case 0: return "user does not exist";
                         case 1: return "password does not match";
                         case 2: return "user exists and password matches";
-                    }       
+                    }  
+                case "TopThree":
+                    printWriter.println(doQueries.getTopDudes());
+                    printWriter.flush();
+                    return "TopThree";
                 default:
                     System.out.println("Invalid input");
                     break;

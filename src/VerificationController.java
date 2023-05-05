@@ -38,7 +38,7 @@ public class VerificationController {
             if(isNew){
                 try {
                     outputStream = new ObjectOutputStream(socket.getOutputStream());
-                    Item item = new Item(verificationView.getUserTextField().getText(),verificationView.getPasswordTextField().getText(),"NewUser");
+                    Item item = new Item(verificationView.getUserTextField().getText(),verificationView.getPasswordTextField().getText(),"NewUser",0);
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
 
@@ -53,7 +53,7 @@ public class VerificationController {
             else {
                 try {
                     outputStream = new ObjectOutputStream(socket.getOutputStream());
-                    Item item = new Item(verificationView.getUserTextField().getText(),verificationView.getPasswordTextField().getText(),"OldUser");
+                    Item item = new Item(verificationView.getUserTextField().getText(),verificationView.getPasswordTextField().getText(),"OldUser", 0);
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
 
