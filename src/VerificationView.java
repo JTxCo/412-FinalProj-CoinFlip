@@ -37,6 +37,9 @@ public class VerificationView {
 
         submitButton = new JButton("Submit!");
         panel.add(submitButton);
+        submitButton.addActionListener(e -> {
+            frame.dispose();
+        });
 
         return panel;
     }
