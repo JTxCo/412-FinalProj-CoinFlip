@@ -15,8 +15,8 @@ public class DoQueries {
             e.printStackTrace();
         }
         makeConnection();
-        startFunction();
-        showData();
+        // startFunction();
+        // showData();
     }
     public void startFunction(){
         if(!isUsernameTaken(" ")){
@@ -195,17 +195,22 @@ public class DoQueries {
             if(rs.next()){
                 if(rs.getString("username").equals(userName)){
                     // System.out.format("Username: %s is taken.\n", userName);
+                    ps.close();
+                    conn.close();
                     return true;
                 }
             }
             else{
                 // System.out.format("Username: %s is not taken.\n", userName);
+                ps.close();
+                conn.close();
                 return false;
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }finally{
+
             // System.out.println("Username check complete.");
         }
         
