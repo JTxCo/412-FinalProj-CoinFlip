@@ -17,7 +17,7 @@ public class ClientController {
         model = new Model();
         //verificationController = new VerificationController();
         initialController = new InitialController(socket);
-        gameViewController = new GameViewController(socket);
+        //gameViewController = new GameViewController(socket);
     }
 
 //    public String getPlayInput() {

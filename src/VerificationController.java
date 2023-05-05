@@ -37,6 +37,8 @@ public class VerificationController {
                     Item item = new Item(verificationView.getUserTextField().getText(),verificationView.getPasswordTextField().getText(),"NewUser");
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
+
+                    GameViewController gameViewController = new GameViewController(socket);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -47,6 +49,8 @@ public class VerificationController {
                     Item item = new Item(verificationView.getUserTextField().getText(),verificationView.getPasswordTextField().getText(),"OldUser");
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
+
+                    GameViewController gameViewController = new GameViewController(socket);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
