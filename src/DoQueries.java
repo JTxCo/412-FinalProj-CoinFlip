@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.sql.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Map;
 public class DoQueries {
     private Connection StartConn;
     public DoQueries() {
@@ -13,8 +16,6 @@ public class DoQueries {
         }
 
         makeConnection();
-        verifyUser("jim", null);
-        verifyUser("jim","jimPass");
         showData();
     }
 
@@ -154,5 +155,24 @@ public class DoQueries {
         
         return false;
     }; // Check if the username is taken
-
+    public ArrayList getTopDudes(){
+        Connection conn;
+        PreparedStatement ps;
+        System.out.println("Getting top dudes...");
+        try{
+            conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
+            ps = conn.prepareStatement("SELECT username, accountBalance FROM coinflipData ORDER BY accountBalance DESC LIMIT 3")
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Map.Entry<String, Integer>> topDudes = new ArrayList<>();
+            while(rs.next()){
+                String username = rs.getString("username");
+                int accountBalance = rs.getInt("accountBalance");
+                Map.Entry<String, Integer> dude = new AbstractMap.SimpleEntry<>(username, accountBalance);
+                topDudes.add(dude);
+            }
+            return topDudes;
+        }catch(SQLException e){
+            e.printStackTrace(); 
+        }
+    }
 }
