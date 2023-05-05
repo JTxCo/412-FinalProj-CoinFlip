@@ -5,7 +5,7 @@ public class Item implements Serializable{
     private String bet;
     private String password;
 
-    public Item(String username, String bet, String password){
+    public Item(String username, String password, String bet){
         this.username=username;
         this.bet=bet;
         this.password = password; 

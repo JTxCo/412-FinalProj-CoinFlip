@@ -57,12 +57,14 @@ public class Server {
         public void run() {
             Item item;  
             try {
-                printWriter = new PrintWriter(clientSocket.getOutputStream());
-                inStream = new ObjectInputStream(clientSocket.getInputStream());          
+                while(true){
+                    printWriter = new PrintWriter(clientSocket.getOutputStream());
+                    inStream = new ObjectInputStream(clientSocket.getInputStream());
                     item = (Item) inStream.readObject();
                     System.out.println("server> object recieved: "+item);
                     printWriter.println(lineFunnel(item));
                     printWriter.flush();
+                }
 
                 }catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
