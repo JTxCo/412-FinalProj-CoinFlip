@@ -188,9 +188,11 @@ public class DoQueries {
             ps.setString(1, userName);
             ResultSet rs = ps.executeQuery();
             // System.out.println(rs.getString("username") + " is the username");
-            if(rs.getString("username").equals(userName)){
-                // System.out.format("Username: %s is taken.\n", userName);
-                return true;
+            if(rs.next()){
+                if(rs.getString("username").equals(userName)){
+                    // System.out.format("Username: %s is taken.\n", userName);
+                    return true;
+                }
             }
             else{
                 // System.out.format("Username: %s is not taken.\n", userName);
