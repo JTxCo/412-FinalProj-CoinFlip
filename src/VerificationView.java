@@ -20,7 +20,8 @@ public class VerificationView {
         // and call the method
         System.out.println("verification view constructor");
         frame = new JFrame();
-        frame.add(makePanel());
+        JPanel mainPanel = makePanel();
+        frame.add(mainPanel);
 
 //        pPanel = passwordPanel();
 //        frame.add(pPanel);
@@ -61,26 +62,16 @@ public class VerificationView {
         panel.add(eerror);
         eerror.setVisible(false);
 
-//        submitButton.addActionListener(e -> {
-//            frame.dispose();
-//        });
 
         return panel;
     }
 
-//    public JPanel passwordPanel(){
-//        JPanel pPanel = new JPanel();
-//        pPanel.setLayout(new BoxLayout(pPanel,BoxLayout.Y_AXIS));
-//        JLabel error = new JLabel("password does not match");
-//        pPanel.add(error);
-//
-//        return pPanel;
-//
-//    }
+
 
     public void makePasswordPanelVisible(){
 //        pPanel.setVisible(true);
         perror.setVisible(true);
+        eerror.setVisible(false);
 
     }
 
@@ -98,13 +89,12 @@ public class VerificationView {
     public void makeExistPanelVisible(){
 //        ePanel.setVisible(true);
         eerror.setVisible(true);
+        perror.setVisible(false);
 
     }
 
     public void switchViews(){
-        submitButton.addActionListener(e -> {
-            frame.dispose();
-        });
+        frame.dispose();
     }
 
     public JTextField getUserTextField() {
