@@ -161,10 +161,18 @@ public class GameView {
     public void setGamestatus(String s){
         gameStatus.setText(s);
     }
-    public void setLabels(String s1, String s2, String s3, Integer i1, Integer i2, Integer i3){
-        user1.setText(s1+" "+i1);
-        user2.setText(s2+" "+i2);
-        user3.setText(s3+" "+i3);  
-    }   
+ 
+    public void setUser1(String s, int i){
+        String string = s+" "+i;
+        user1.setText(string);
+    }
+    public void setUser2(String s, int i){
+        String string = s+" "+i;
+        user2.setText(string);
+    }
+    public void setUser3(String s, int i){
+        String string = s+" "+i;
+        user3.setText(string);
+    }
 
 }

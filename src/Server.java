@@ -90,11 +90,11 @@ public class Server {
                     return winLose;
                 case "NewUser":
                     Boolean isTaken = doQueries.isUsernameTaken(item.getUsername());
-                    doQueries.InitializeUser(item.getUsername(), item.getPassword());
                     if(isTaken){
                         return "Username is taken";
                     }
                     else{
+                        doQueries.InitializeUser(item.getUsername(), item.getPassword());
                         return "NewUser";
                     }
                 case "OldUser":
