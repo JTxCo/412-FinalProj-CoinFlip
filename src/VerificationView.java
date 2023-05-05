@@ -22,6 +22,7 @@ public class VerificationView {
         frame.add(mainPanel);
 
         frame.setSize(400,400);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
     }

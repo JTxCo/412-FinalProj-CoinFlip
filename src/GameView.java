@@ -35,6 +35,7 @@ public class GameView {
         //makeBettingSection();
         frame.add(BorderLayout.CENTER,panel);
         frame.setSize(600,600);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
     public JPanel makeLeaderBoard(){

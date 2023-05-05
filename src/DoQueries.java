@@ -179,6 +179,7 @@ public class DoQueries {
             ResultSet rs = ps.executeQuery();
             ps.close();
             conn.close();
+            System.out.printf("rs is:  "+ rs);
             if(rs.next()){
                 System.out.format("Username: %s is taken.\n", userName);
                 return true;

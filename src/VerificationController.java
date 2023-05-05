@@ -48,6 +48,15 @@ public class VerificationController {
 
                     GameViewController gameViewController = new GameViewController(socket,item);
                     verificationView.switchViews();
+
+//                    if(retval.equals("Username is taken")){
+//                        verificationView.makeUniqueErrorVisible();
+//                    }
+//                    else{
+//                        GameViewController gameViewController = new GameViewController(socket,item);
+//                        verificationView.switchViews();
+//                    }
+
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
