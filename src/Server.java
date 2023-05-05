@@ -89,8 +89,14 @@ public class Server {
                     System.out.println("winLose: "+winLose);
                     return winLose;
                 case "NewUser":
+                    Boolean isTaken = doQueries.isUsernameTaken(item.getUsername());
                     doQueries.InitializeUser(item.getUsername(), item.getPassword());
-                    return "NewUser";
+                    if(isTaken){
+                        return "Username is taken";
+                    }
+                    else{
+                        return "NewUser";
+                    }
                 case "OldUser":
                     int result = doQueries.verifyUser(item.getUsername(), item.getPassword());
                     switch(result){

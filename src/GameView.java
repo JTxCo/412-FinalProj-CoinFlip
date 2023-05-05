@@ -15,7 +15,9 @@ public class GameView {
     JTextField betTextField;
     JButton betButton;
     JLabel gameStatus;
-
+    JLabel user1;
+    JLabel user2;
+    JLabel user3;
     public GameView() {
         //makePlaySelection();
 
@@ -40,9 +42,9 @@ public class GameView {
         leaderboardPanel.setLayout(new BoxLayout(leaderboardPanel,BoxLayout.Y_AXIS));
 
         JLabel leaderboard = new JLabel("Leaderboard");
-        JLabel user1 = new JLabel("Insert user from array");
-        JLabel user2 = new JLabel("Insert user from array");
-        JLabel user3 = new JLabel("Insert user from array");
+         user1 = new JLabel("Insert user from array");
+         user2 = new JLabel("Insert user from array");
+         user3 = new JLabel("Insert user from array");
 
         leaderboardPanel.add(leaderboard);
         leaderboardPanel.add(user1);
@@ -159,5 +161,10 @@ public class GameView {
     public void setGamestatus(String s){
         gameStatus.setText(s);
     }
+    public void setLabels(String s1, String s2, String s3, Integer i1, Integer i2, Integer i3){
+        user1.setText(s1+" "+i1);
+        user2.setText(s2+" "+i2);
+        user3.setText(s3+" "+i3);  
+    }   
 
 }
