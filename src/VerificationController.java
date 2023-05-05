@@ -47,6 +47,7 @@ public class VerificationController {
                     System.out.println("client> recieved from server: "+retval);
 
                     GameViewController gameViewController = new GameViewController(socket,item);
+                    verificationView.switchViews();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
