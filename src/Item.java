@@ -2,6 +2,7 @@ import java.io.Serializable;
 
 public class Item implements Serializable{
     private String username;
+
     private String bet;
     private String password;
     private int BetAmount;
@@ -10,6 +11,10 @@ public class Item implements Serializable{
         this.bet=bet;
         this.password = password; 
         this.BetAmount = BetAmount;
+    }
+
+    public void setBet(String bet) {
+        this.bet = bet;
     }
     public String getUsername() {
         return username;

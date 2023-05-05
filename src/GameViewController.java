@@ -8,8 +8,10 @@ public class GameViewController {
     private String playInput="";
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
+    private ObjectInputStream inStream = null;
 
     private Socket socket;
+    private Item item;
     public GameViewController() {
         // Create a new instance of the class
         // and call the method
@@ -18,10 +20,11 @@ public class GameViewController {
 
     }
 
-    public GameViewController(Socket s) {
+    public GameViewController(Socket s, Item i) {
         // Create a new instance of the class
         // and call the method
         socket = s;
+        item = i;
         gameView = new GameView();
         gameView.setPlayButtonActionListener(new PlayButtonActionListener());
         //gameView.setBetButtonActionListener(new BetButtonActionListener());
@@ -32,11 +35,43 @@ public class GameViewController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("play button");
+
+            BufferedReader socketReader = null; //reader from server
+            try {
+                socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+                outputStream = new ObjectOutputStream(socket.getOutputStream());
+                item.setBet("TopThree");
+                System.out.println("Object written: "+item);
+                outputStream.writeObject(item);
+
+                String retval = socketReader.readLine();
+                System.out.println("client> recieved from server: "+retval);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+
             // outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             if (gameView.getHeadsButton().isSelected()){
                 System.out.println("Heads button selected!");
-                playInput="Heads"; //change to setPlayInput (will create method)
+                //playInput="Heads"; //change to setPlayInput (will create method)
+                //BufferedReader socketReader = null; //reader from server
+                try {
+                    socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+                    outputStream = new ObjectOutputStream(socket.getOutputStream());
+                    item.setBet("Heads");
+                    System.out.println("Object written: "+item);
+                    outputStream.writeObject(item);
+
+                    String retval = socketReader.readLine();
+                    System.out.println("client> recieved from server: "+retval);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
 //                try {
 //                    //socket = new Socket("localhost", 5001);
 //                    BufferedReader socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));

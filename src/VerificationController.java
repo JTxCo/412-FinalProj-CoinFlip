@@ -42,10 +42,11 @@ public class VerificationController {
                     System.out.println("Object written: "+item);
                     outputStream.writeObject(item);
 
+
                     String retval = socketReader.readLine();
                     System.out.println("client> recieved from server: "+retval);
 
-                    GameViewController gameViewController = new GameViewController(socket);
+                    GameViewController gameViewController = new GameViewController(socket,item);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -71,7 +72,7 @@ public class VerificationController {
                     }
                     else if(retval.equals("user exists and password matches")){
                         verificationView.switchViews();
-                        GameViewController gameViewController = new GameViewController(socket);
+                        GameViewController gameViewController = new GameViewController(socket,item);
                     }
 
 //                    String betResult = socketReader.readLine();
