@@ -16,7 +16,7 @@ public class DoQueries {
         }
 
         makeConnection();
-        showData();
+        // showData();
     }
 
     public void makeConnection() {//this connects or makes the database
@@ -73,7 +73,7 @@ public class DoQueries {
         }
 
     }; // Update the balance of the user
-    public void InitializeUser(String username, String password, int accountBalance){
+    public void InitializeUser(String username, String password){
         System.out.println("Initializing user...");
         Connection conn;
         try {
@@ -81,7 +81,7 @@ public class DoQueries {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO coinflipData (username, password, accountBalance) VALUES (?,?,?)");
             ps.setString(1, username);
             ps.setString(2, password);
-            ps.setInt(3, accountBalance);
+            ps.setInt(3, 100);
             ps.executeUpdate();
             ps.close();
             conn.close();
@@ -90,11 +90,52 @@ public class DoQueries {
             e.printStackTrace();
         }
 
-        System.out.format("User initialized as: %s %s %d.", username, password, accountBalance);
+        System.out.format("User initialized as: %s %s %d.", username, password, 100);
     }; // Initialize the user
-    public void verifyUser( String username, String password){
+    public void determineUpdate(String username, String message){
+        int balance = getBalance(username);
+        if(message.equals("Win!")){
+            balance = balance + 10;
+            UpdateBalance(username, balance);
+        }
+        else if(message.equals("Lose")){
+            balance = balance - 10;
+            UpdateBalance(username, balance);
+        }
+        else{
+            System.out.println("Error: message not recognized.");
+        }
+    }
+    public int getBalance(String username){
+        Connection conn;
+        int balance = 0;
+        try{
+            conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
+            PreparedStatement ps = conn.prepareStatement("SELECT accountBalance FROM coinflipData WHERE username = ?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            balance = rs.getInt("accountBalance");
+            ps.close();
+            conn.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return balance;
+    }    
+    public Boolean isBetValid(String username, int bet){
+        int balance = 0;
+        getBalance(username);
+        if(bet > balance){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    public int verifyUser( String username, String password){
         System.out.println("Verifying user...");
         Connection conn;
+        int i =0;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
             PreparedStatement ps = conn.prepareStatement("SELECT CASE WHEN EXISTS (SELECT 1 FROM coinflipData WHERE username = ? AND password = ?) THEN 2 WHEN EXISTS (SELECT 1 FROM coinflipData WHERE username = ?) THEN 1 ELSE 0 END");
@@ -102,7 +143,7 @@ public class DoQueries {
             ps.setString(2, password);
             ps.setString(3, username);
             ResultSet rs = ps.executeQuery();
-            int i = rs.getInt(1);
+             i = rs.getInt(1);
             switch (i) {
                 case 0:
                     System.out.println("User with username " + username + " does not exist.");
@@ -125,7 +166,7 @@ public class DoQueries {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
+        return i;
     }; // Verify the user
     public Boolean isUsernameTaken(String userName){
         Connection conn; 
@@ -158,21 +199,21 @@ public class DoQueries {
     public ArrayList getTopDudes(){
         Connection conn;
         PreparedStatement ps;
+        ArrayList<Map.Entry<String, Integer>> topDudes = new ArrayList<>();
         System.out.println("Getting top dudes...");
         try{
             conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
-            ps = conn.prepareStatement("SELECT username, accountBalance FROM coinflipData ORDER BY accountBalance DESC LIMIT 3")
+            ps = conn.prepareStatement("SELECT username, accountBalance FROM coinflipData ORDER BY accountBalance DESC LIMIT 3");
             ResultSet rs = ps.executeQuery();
-            ArrayList<Map.Entry<String, Integer>> topDudes = new ArrayList<>();
             while(rs.next()){
                 String username = rs.getString("username");
                 int accountBalance = rs.getInt("accountBalance");
                 Map.Entry<String, Integer> dude = new AbstractMap.SimpleEntry<>(username, accountBalance);
                 topDudes.add(dude);
             }
-            return topDudes;
         }catch(SQLException e){
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
+        return topDudes; 
     }
 }

@@ -55,46 +55,54 @@ public class Server {
 
         @Override
         public void run() {
-            Object line = null;
+            Item item;  
             try {
-
-                inStream = new ObjectInputStream(clientSocket.getInputStream());
-                try {
-                    Item item = (Item) inStream.readObject();
+                printWriter = new PrintWriter(clientSocket.getOutputStream());
+                inStream = new ObjectInputStream(clientSocket.getInputStream());          
+                    item = (Item) inStream.readObject();
                     System.out.println("server> object recieved: "+item);
-                } catch (ClassNotFoundException e) {
+                    printWriter.println(lineFunnel(item));
+                    printWriter.flush();
+
+                }catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
-
-
-//                bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-//                printWriter = new PrintWriter(clientSocket.getOutputStream());
-//                while((line = bufferedReader.readLine()) != null ){
-//                    System.out.println("Server received: " + line);
-//                    printWriter.println(gameLogic.flipCoin());
-//                    printWriter.flush();
-//                    printWriter.println(gameLogic.compareBet(line));
-//                    printWriter.flush();
-//                }
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+        }
+        public String lineFunnel(Item item) {
+            String winLose = "";
+            switch (item.getBet()){
+                case "Heads":
+                    gameLogic.flipCoin();
+                    winLose = gameLogic.compareBet("Heads");
+                    doQueries.determineUpdate(item.getUsername(), winLose );
+                    System.out.println("winLose: "+winLose);
+                    return winLose;
+                case "Tails":
+                    gameLogic.flipCoin();
+                    winLose = gameLogic.compareBet("Tails");
+                    doQueries.determineUpdate(item.getUsername(), winLose);
+                    System.out.println("winLose: "+winLose);
+                    return winLose;
+                case "NewUser":
+                    doQueries.InitializeUser(item.getUsername(), item.getPassword());
+                    return "NewUser";
+                case "OldUser":
+                    int result = doQueries.verifyUser(item.getUsername(), item.getPassword());
+                    switch(result){
+                        case 0: return "user does not exist";
+                        case 1: return "password does not match";
+                        case 2: return "user exists and password matches";
+                    }       
+                default:
+                    System.out.println("Invalid input");
+                    break;
             }
+            return winLose;
         }
     }
 
-    public void lineFunnel(String line) {
-
-        switch (line) {
-            case "Heads":
-                System.out.println("Heads");
-                break;
-            case "Tails":
-                System.out.println("Tails");
-                break;
-            default:
-                System.out.println("Invalid input");
-                break;
-        }
-    }
+    
 }
