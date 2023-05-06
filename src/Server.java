@@ -7,6 +7,7 @@ public class Server {
     DoQueries doQueries;
     ServerSocket serverSocket;
     private ObjectInputStream inStream = null;
+
     public static void main(String[] args) {
         new Server().createServer();
     }
@@ -55,55 +56,64 @@ public class Server {
 
         @Override
         public void run() {
-            Item item;  
+            Item item;
             try {
-                while(true){
+                while (true) {
                     printWriter = new PrintWriter(clientSocket.getOutputStream());
                     inStream = new ObjectInputStream(clientSocket.getInputStream());
                     item = (Item) inStream.readObject();
-                    System.out.println("server> object recieved: "+item);
+                    System.out.println("server> object recieved: " + item);
                     printWriter.println(lineFunnel(item));
                     printWriter.flush();
                 }
 
-                }catch (ClassNotFoundException e) {
-                    throw new RuntimeException(e);
-                } catch (IOException e){
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
+
         public String lineFunnel(Item item) {
             String winLose = "";
-            switch (item.getBet()){
+            String balance;
+            String retString;
+            switch (item.getBet()) {
                 case "Heads":
                     gameLogic.flipCoin();
                     winLose = gameLogic.compareBet("Heads");
-                    doQueries.determineUpdate(item.getUsername(), winLose );
-                    System.out.println("winLose: "+winLose);
-                    return winLose;
+                    doQueries.determineUpdate(item.getUsername(), winLose);
+                    balance = String.valueOf(doQueries.getBalance(item.getUsername()));
+                    retString = String.format("%s balance: %s", winLose, balance);
+                    System.out.println("winLose: " + winLose + " balance: " + balance);
+                    return retString;
                 case "Tails":
                     gameLogic.flipCoin();
                     winLose = gameLogic.compareBet("Tails");
                     doQueries.determineUpdate(item.getUsername(), winLose);
-                    System.out.println("winLose: "+winLose);
-                    return winLose;
+                    balance = String.valueOf(doQueries.getBalance(item.getUsername()));
+                    retString = String.format("%s balance: %s", winLose, balance);
+                    System.out.println("winLose: " + winLose + " balance: " + balance);
+                    return retString;
                 case "NewUser":
                     Boolean isTaken = doQueries.isUsernameTaken(item.getUsername());
-                    if(isTaken){
+                    if (isTaken) {
                         return "Username is taken";
-                    }
-                    else{
+                    } else {
                         doQueries.InitializeUser(item.getUsername(), item.getPassword());
                         return "NewUser";
                     }
                 case "OldUser":
                     int result = doQueries.verifyUser(item.getUsername(), item.getPassword());
-                    switch(result){
-                        case 0: return "user does not exist";
-                        case 1: return "password does not match";
-                        case 2: return "user exists and password matches";
-                    }  
+                    switch (result) {
+                        case 0:
+                            return "user does not exist";
+                        case 1:
+                            return "password does not match";
+                        case 2:
+                            return "user exists and password matches";
+                    }
                 case "TopThree":
                     printWriter.println(doQueries.getTopDudes());
                     printWriter.flush();
@@ -115,6 +125,4 @@ public class Server {
             return winLose;
         }
     }
-
-    
 }

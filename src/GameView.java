@@ -18,31 +18,32 @@ public class GameView {
     JLabel user1;
     JLabel user2;
     JLabel user3;
+
     public GameView() {
-        //makePlaySelection();
+        // makePlaySelection();
 
         frame = new JFrame();
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        panel.add(BorderLayout.SOUTH,makePlaySelection());
-        panel.add(BorderLayout.CENTER,makeLeaderBoard());
-        panel.add(BorderLayout.NORTH,makeMiddleSection());
+        panel.add(BorderLayout.SOUTH, makePlaySelection());
+        panel.add(BorderLayout.CENTER, makeLeaderBoard());
+        panel.add(BorderLayout.NORTH, makeMiddleSection());
 
-
-        frame.add(BorderLayout.CENTER,panel);
-        frame.setSize(600,600);
+        frame.add(BorderLayout.CENTER, panel);
+        frame.setSize(600, 600);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-    public JPanel makeLeaderBoard(){
+
+    public JPanel makeLeaderBoard() {
         JPanel leaderboardPanel = new JPanel();
-        leaderboardPanel.setLayout(new BoxLayout(leaderboardPanel,BoxLayout.Y_AXIS));
+        leaderboardPanel.setLayout(new BoxLayout(leaderboardPanel, BoxLayout.Y_AXIS));
 
         JLabel leaderboard = new JLabel("Leaderboard");
-         user1 = new JLabel("Insert user from array");
-         user2 = new JLabel("Insert user from array");
-         user3 = new JLabel("Insert user from array");
+        user1 = new JLabel("Insert user from array");
+        user2 = new JLabel("Insert user from array");
+        user3 = new JLabel("Insert user from array");
 
         leaderboardPanel.add(leaderboard);
         leaderboardPanel.add(user1);
@@ -51,19 +52,20 @@ public class GameView {
 
         return leaderboardPanel;
     }
+
     public JTextField getBetTextField() {
         return betTextField;
     }
 
-
-    public JPanel makeMiddleSection(){
+    public JPanel makeMiddleSection() {
         JPanel middleSection = new JPanel();
-        middleSection.setLayout(new BoxLayout(middleSection,BoxLayout.Y_AXIS));
+        middleSection.setLayout(new BoxLayout(middleSection, BoxLayout.Y_AXIS));
         middleSection.add(makeBigLabel());
         middleSection.add(makeGameStatus());
         return middleSection;
     }
-    public JPanel makeBigLabel(){
+
+    public JPanel makeBigLabel() {
         JPanel bigLabelPanel = new JPanel();
         JLabel bigLabel = new JLabel("Coin Flip!");
         Font font = bigLabel.getFont();
@@ -71,7 +73,8 @@ public class GameView {
         bigLabelPanel.add(bigLabel);
         return bigLabelPanel;
     }
-    public JPanel makeGameStatus(){
+
+    public JPanel makeGameStatus() {
         JPanel gameStatusPanel = new JPanel();
         JLabel title = new JLabel("Game Status: ");
         gameStatus = new JLabel(" ", SwingConstants.CENTER);
@@ -79,7 +82,6 @@ public class GameView {
         gameStatusPanel.add(gameStatus);
         return gameStatusPanel;
     }
-
 
     public String getPlayInput() {
         return playInput;
@@ -93,7 +95,7 @@ public class GameView {
         return tailsButton;
     }
 
-    public JPanel makePlaySelection(){
+    public JPanel makePlaySelection() {
         JPanel playSelectionPanel = new JPanel();
         JLabel instructions = new JLabel("instructions here for playing");
         playSelectionPanel.add(instructions);
@@ -112,27 +114,29 @@ public class GameView {
         playButton = new JButton("Play!");
         playSelectionPanel.add(playButton);
 
-
-
         return playSelectionPanel;
     }
 
-    public void setPlayButtonActionListener(ActionListener aL){playButton.addActionListener(aL);
+    public void setPlayButtonActionListener(ActionListener aL) {
+        playButton.addActionListener(aL);
     }
-    public void setGamestatus(String s){
+
+    public void setGamestatus(String s) {
         gameStatus.setText(s);
     }
- 
-    public void setUser1(String s, int i){
-        String string = s+" "+i;
+
+    public void setUser1(String s, int i) {
+        String string = s + " " + i;
         user1.setText(string);
     }
-    public void setUser2(String s, int i){
-        String string = s+" "+i;
+
+    public void setUser2(String s, int i) {
+        String string = s + " " + i;
         user2.setText(string);
     }
-    public void setUser3(String s, int i){
-        String string = s+" "+i;
+
+    public void setUser3(String s, int i) {
+        String string = s + " " + i;
         user3.setText(string);
     }
 
