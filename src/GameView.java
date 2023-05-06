@@ -69,17 +69,6 @@ public class GameView {
         betSelectionPanel.add(betTextField);
         betSelectionPanel.add(betButton);
 
-        //temporary: take user input of bet amount, will replace with text field
-//        try {
-//            System.out.println("Enter bet amount: ");
-//            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            String betInput = bufferedReader.readLine();
-//            System.out.println("entered: "+betInput);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
         return betSelectionPanel;
 
     }
@@ -142,17 +131,6 @@ public class GameView {
         playButton = new JButton("Play!");
         playSelectionPanel.add(playButton);
 
-
-        //temporary: take user input of heads/tails, will replace with radio buttons later
-//        try {
-//            System.out.println("Enter Heads or Tails: ");
-//            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            playInput = bufferedReader.readLine();
-//            System.out.println("selected: "+playInput);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
         return playSelectionPanel;
     }

@@ -26,40 +26,6 @@ public class Client {
             throw new RuntimeException(e);
         }
         clientController = new ClientController(socket);
-        // String playInput = clientController.getPlayInput();
-
-        // client Connecting to server
-        // try {
-        // socket = new Socket("localhost", 5001);
-        // BufferedReader socketReader = new BufferedReader(new
-        // InputStreamReader(socket.getInputStream()));
-        // BufferedReader inputReader = new BufferedReader(new
-        // InputStreamReader(System.in));
-        // PrintWriter socketWriter = new PrintWriter(socket.getOutputStream());
-        // String line = "testing";
-        // System.out.println("client> sent to server: "+playInput);
-        // socketWriter.println(playInput);
-        // socketWriter.flush();
-        // String retval = socketReader.readLine();
-        // System.out.println("client> recieved result from server coin flip: "+retval);
-        // String betResult = socketReader.readLine();
-        // System.out.println("client> bet result: "+betResult);
-        //
-        //
-        //
-        //// while((line = inputReader.readLine())!=null){
-        //// socketWriter.println(line);
-        //// socketWriter.flush();
-        //// String retval = socketReader.readLine();
-        //// System.out.println(retval);
-        //// }
-        // } catch (UnknownHostException e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // } catch (IOException e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // }
 
     };
 }

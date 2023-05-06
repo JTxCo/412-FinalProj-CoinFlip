@@ -73,8 +73,6 @@ public class GameViewController {
         gameView = new GameView();
         leadersBoard();
         gameView.setPlayButtonActionListener(new PlayButtonActionListener());
-        //gameView.setBetButtonActionListener(new BetButtonActionListener());
-
     }
 
     public class PlayButtonActionListener implements ActionListener {

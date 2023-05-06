@@ -183,7 +183,6 @@ public class DoQueries {
     public Boolean isUsernameTaken(String userName){
         Connection conn; 
         PreparedStatement ps;
-        // System.out.println("Checking if username is taken...");
         try {
             conn = DriverManager.getConnection("jdbc:sqlite: coinflipDB.db");
             ps = conn.prepareStatement("SELECT * FROM coinflipData WHERE username = ?");
@@ -191,17 +190,14 @@ public class DoQueries {
             ResultSet rs = ps.executeQuery();
             String pragmaCmd = "PRAGMA busy_timeout = 10000;";
             conn.createStatement().executeUpdate(pragmaCmd);
-            // System.out.println(rs.getString("username") + " is the username");
             if(rs.next()){
                 if(rs.getString("username").equals(userName)){
-                    // System.out.format("Username: %s is taken.\n", userName);
                     ps.close();
                     conn.close();
                     return true;
                 }
             }
             else{
-                // System.out.format("Username: %s is not taken.\n", userName);
                 ps.close();
                 conn.close();
                 return false;
@@ -211,7 +207,6 @@ public class DoQueries {
             e.printStackTrace();
         }finally{
 
-            // System.out.println("Username check complete.");
         }
         
         return false;

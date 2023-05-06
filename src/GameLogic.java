@@ -4,13 +4,7 @@ public class GameLogic {
     public GameLogic() {
         flipCoin();
         displayResult();
-
-        // Create a new instance of the class
-        // and call the method
-
     }
-    //create a function that flips a coin and returns the result
-    //not returning anything at the momment
     public String flipCoin(){
         double num = Math.random()*10;
         rand = (int)num;
