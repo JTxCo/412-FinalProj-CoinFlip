@@ -26,13 +26,10 @@ public class GameView {
         panel.setLayout(new BorderLayout());
 
         panel.add(BorderLayout.SOUTH,makePlaySelection());
-        //panel.add(BorderLayout.EAST,makeBettingSection());
         panel.add(BorderLayout.CENTER,makeLeaderBoard());
         panel.add(BorderLayout.NORTH,makeMiddleSection());
 
-        // Create a new instance of the class
-        // and call the method
-        //makeBettingSection();
+
         frame.add(BorderLayout.CENTER,panel);
         frame.setSize(600,600);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -58,31 +55,7 @@ public class GameView {
         return betTextField;
     }
 
-    public JPanel makeBettingSection(){
-        JPanel betSelectionPanel = new JPanel();
-        betSelectionPanel.setLayout(new BoxLayout(betSelectionPanel,BoxLayout.Y_AXIS));
-        JLabel instructions = new JLabel("Enter Bet: ");
-        betTextField = new JTextField(10);
-        betButton = new JButton("Go!");
 
-        betSelectionPanel.add(instructions);
-        betSelectionPanel.add(betTextField);
-        betSelectionPanel.add(betButton);
-
-        //temporary: take user input of bet amount, will replace with text field
-//        try {
-//            System.out.println("Enter bet amount: ");
-//            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            String betInput = bufferedReader.readLine();
-//            System.out.println("entered: "+betInput);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-        return betSelectionPanel;
-
-    }
     public JPanel makeMiddleSection(){
         JPanel middleSection = new JPanel();
         middleSection.setLayout(new BoxLayout(middleSection,BoxLayout.Y_AXIS));
@@ -106,10 +79,7 @@ public class GameView {
         gameStatusPanel.add(gameStatus);
         return gameStatusPanel;
     }
-    public void setBetButtonActionListener(ActionListener aL){betButton.addActionListener(aL);
-    }
-    public void makeCoinLabel(){}
-    public void makeInstructionLabel(){}
+
 
     public String getPlayInput() {
         return playInput;
@@ -143,16 +113,6 @@ public class GameView {
         playSelectionPanel.add(playButton);
 
 
-        //temporary: take user input of heads/tails, will replace with radio buttons later
-//        try {
-//            System.out.println("Enter Heads or Tails: ");
-//            InputStreamReader inputStreamReader = new InputStreamReader(System.in);
-//            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-//            playInput = bufferedReader.readLine();
-//            System.out.println("selected: "+playInput);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
         return playSelectionPanel;
     }

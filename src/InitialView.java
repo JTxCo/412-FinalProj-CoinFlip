@@ -14,13 +14,11 @@ public class InitialView {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        // Create a new instance of the class
-        // and call the method
     }
     public JPanel makePrompt() {
         System.out.println("make prompt activated");
         JPanel panel = new JPanel();
-//        panel.setLayout(new BorderLayout());
+
 
         JLabel label = new JLabel("Are you a new or returning user?");
         newButton = new JButton("New");
@@ -38,7 +36,7 @@ public class InitialView {
 
 
         return panel;
-        // Create a new label that shows what the user is supposed to do
+
     }
 
     public void setNewButtonActionListener(ActionListener aL){newButton.addActionListener(aL);

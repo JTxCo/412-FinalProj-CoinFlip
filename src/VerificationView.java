@@ -7,12 +7,8 @@ public class VerificationView {
     JTextField userTextField;
     JTextField passwordTextField;
     JButton submitButton;
-
     JFrame frame;
-    JPanel pPanel;
-    JPanel ePanel;
     JLabel uniqueError;
-
     JLabel perror;
     JLabel eerror;
 
@@ -61,7 +57,6 @@ public class VerificationView {
 
 
     public void makePasswordPanelVisible(){
-//        pPanel.setVisible(true);
         perror.setVisible(true);
         eerror.setVisible(false);
 
@@ -74,18 +69,8 @@ public class VerificationView {
     }
 
 
-//    public JPanel existPanel(){
-//        JPanel ePanel = new JPanel();
-//        ePanel.setLayout(new BoxLayout(ePanel,BoxLayout.Y_AXIS));
-//        JLabel error = new JLabel("user does not exist");
-//        ePanel.add(error);
-//
-//        return ePanel;
-//
-//    }
 
     public void makeExistPanelVisible(){
-//        ePanel.setVisible(true);
         eerror.setVisible(true);
         perror.setVisible(false);
 

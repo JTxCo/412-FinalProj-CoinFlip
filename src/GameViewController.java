@@ -13,12 +13,16 @@ public class GameViewController {
     private Socket socket;
     private Item item;
     public GameViewController() {
-        // Create a new instance of the class
-        // and call the method
-//        gameView = new GameView();
-//        gameView.setPlayButtonActionListener(new PlayButtonActionListener());
-
     }
+
+    public GameViewController(Socket s, Item i) {
+        socket = s;
+        item = i;
+        gameView = new GameView();
+        leadersBoard();
+        gameView.setPlayButtonActionListener(new PlayButtonActionListener());
+    }
+
     public void leadersBoard(){
         try {
             socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -65,17 +69,7 @@ public class GameViewController {
             throw new RuntimeException(ex);
         }
     }
-    public GameViewController(Socket s, Item i) {
-        // Create a new instance of the class
-        // and call the method
-        socket = s;
-        item = i;
-        gameView = new GameView();
-        leadersBoard();
-        gameView.setPlayButtonActionListener(new PlayButtonActionListener());
-        //gameView.setBetButtonActionListener(new BetButtonActionListener());
 
-    }
 
     public class PlayButtonActionListener implements ActionListener {
         
@@ -88,8 +82,7 @@ public class GameViewController {
 
             if (gameView.getHeadsButton().isSelected()){
                 System.out.println("Heads button selected!");
-                //playInput="Heads"; //change to setPlayInput (will create method)
-                //BufferedReader socketReader = null; //reader from server
+
                 try {
                     socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
@@ -108,7 +101,6 @@ public class GameViewController {
             }
             else if(gameView.getTailsButton().isSelected()){
                 System.out.println("Tails button selected!");
-                //playInput="Tails";
 
                 try {
                     socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -132,18 +124,7 @@ public class GameViewController {
         }
     }
 
-    public class BetButtonActionListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            Double betInput = Double.parseDouble(gameView.getBetTextField().getText());
-            System.out.println("Bet amount entered: "+betInput);
 
-        }
-    }
 
-    public String getPlayInput() {
-        //return gameView.getPlayInput();
-        return playInput;
-    }
 
 }

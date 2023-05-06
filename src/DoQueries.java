@@ -6,8 +6,6 @@ import java.util.Map;
 public class DoQueries {
     private Connection StartConn;
     public DoQueries() {
-           // Create a new instance of the class
-        // and call the method
         try { 
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
@@ -15,8 +13,6 @@ public class DoQueries {
             e.printStackTrace();
         }
         makeConnection();
-        // startFunction();
-        // showData();
     }
     public void startFunction(){
         if(!isUsernameTaken(" ")){
