@@ -11,8 +11,7 @@ public class InitialController {
     }
     public InitialController(Socket s) {
         socket = s;
-        // Create a new instance of the class
-        // and call the method
+
         initialView = new InitialView();
         initialView.setNewButtonActionListener(new NewButtonActionListener());
         initialView.setReturnButtonActionListener(new ReturnButtonActionListener());

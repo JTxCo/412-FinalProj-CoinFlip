@@ -11,10 +11,7 @@ public class VerificationController {
     private ObjectInputStream inputStream = null;
     private ObjectOutputStream outputStream = null;
     public VerificationController() {
-        // Create a new instance of the class
-        // and call the method
 
-        //verificationView = new VerificationView();
     }
     public VerificationController(boolean bool,Socket s){
         socket = s;
@@ -46,16 +43,15 @@ public class VerificationController {
                     String retval = socketReader.readLine();
                     System.out.println("client> recieved from server: "+retval);
 
-                    GameViewController gameViewController = new GameViewController(socket,item);
-                    verificationView.switchViews();
+                    if(retval.equals("Username is taken")){
+                        verificationView.makeUniqueErrorVisible();
+                    }
+                    else{
+                        GameViewController gameViewController = new GameViewController(socket,item);
+                        verificationView.switchViews();
+                    }
 
-//                    if(retval.equals("Username is taken")){
-//                        verificationView.makeUniqueErrorVisible();
-//                    }
-//                    else{
-//                        GameViewController gameViewController = new GameViewController(socket,item);
-//                        verificationView.switchViews();
-//                    }
+
 
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -85,14 +81,11 @@ public class VerificationController {
                         GameViewController gameViewController = new GameViewController(socket,item);
                     }
 
-//                    String betResult = socketReader.readLine();
-//                    System.out.println("client> bet result: "+betResult);
 
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
-
 
 
         }

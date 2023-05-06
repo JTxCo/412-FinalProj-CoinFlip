@@ -4,7 +4,9 @@ public class GameLogic {
     public GameLogic() {
         flipCoin();
         displayResult();
+
     }
+
     public String flipCoin(){
         double num = Math.random()*10;
         rand = (int)num;

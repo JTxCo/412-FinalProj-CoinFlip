@@ -11,21 +11,19 @@ public class Client {
     Socket socket;
 
     public static void main(String[] args) {
-        // Create a new instance of the class
-        // and call the method
         new Client().createController();
     }
 
     void createController() {
         clientController = new ClientController();
 
-        // client Connecting to server, need to close connection
         try {
             socket = new Socket("localhost", 5001);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         clientController = new ClientController(socket);
+
 
     };
 }

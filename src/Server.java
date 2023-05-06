@@ -46,7 +46,7 @@ public class Server {
 
     private class ClientConnection implements Runnable {
         private Socket clientSocket;
-        BufferedReader bufferedReader;
+
         PrintWriter printWriter;
 
         public ClientConnection(Socket clientSocket) {
